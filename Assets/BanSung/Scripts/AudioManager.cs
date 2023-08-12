@@ -7,7 +7,7 @@ namespace Assets.BanSung.Scripts
     {
         public AudioSource _AudioSource;
 
-        public void Play(AudioClip clip)
+        public void FasdPlay(AudioClip clip)
         {
             _AudioSource.PlayOneShot(clip);
         }

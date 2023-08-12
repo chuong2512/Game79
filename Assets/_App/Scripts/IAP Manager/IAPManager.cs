@@ -65,28 +65,7 @@ public class IAPManager : PersistentSingleton<IAPManager>, IStoreListener
 #if UNITY_EDITOR
         OnPurchaseComplete(productId);
 #else
-            // If Purchasing has been initialized ...
-            if (IsInitialized())
-            {
-                Product product = storeController.products.WithID(productId);
-
-                if (product != null && product.availableToPurchase)
-                {
-                    Debug.Log(string.Format("Purchasing product asychronously: '{0}'", product.definition.id));
-                    storeController.InitiatePurchase(product);
-                }
-                else
-                {
-                    // ... report the product look-up failure situation  
-                    Debug.Log("BuyProductID: FAIL. Not purchasing product, either is not found or is not available for purchase");
-                }
-            }
-            else
-            {
-                // ... report the fact Purchasing has not succeeded initializing yet. Consider waiting longer or 
-                // retrying initialization.
-                Debug.Log("BuyProductID FAIL. Not initialized.");
-            }
+            
 #endif
     }
 
@@ -207,6 +186,11 @@ public class IAPManager : PersistentSingleton<IAPManager>, IStoreListener
         // saving purchased products to the cloud, and when that save is delayed. 
         return PurchaseProcessingResult.Complete;
     }
+    
+    private void BuyPack()
+    {
+        //todo: buy pack
+    }
 
     private void HandleRestorePurchase(string productId)
     {
@@ -218,16 +202,10 @@ public class IAPManager : PersistentSingleton<IAPManager>, IStoreListener
         OnPurchaseSuccess?.Invoke();
     }
 
-    private void BuyPack()
-    {
-        //todo: buy pack
-    }
+    
 
 
-    private IEnumerator CoHandleRestore(string productId)
-    {
-        yield return new WaitForSeconds(0.15f);
-    }
+ 
 
     public static string GetLocalizePrice(string key, string defaultPriceText)
     {
@@ -240,5 +218,10 @@ public class IAPManager : PersistentSingleton<IAPManager>, IStoreListener
     {
         Debug.Log(string.Format("OnPurchaseFailed: FAIL. Product: '{0}', PurchaseFailureReason: {1}",
             product.definition.storeSpecificId, failureReason));
+    }
+    
+    private IEnumerator CoHandleRestore(string productId)
+    {
+        yield return new WaitForSeconds(0.15f);
     }
 }

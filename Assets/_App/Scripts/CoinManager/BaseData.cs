@@ -5,6 +5,13 @@ using UnityEngine;
 public class BaseData : MonoBehaviour {
     protected string prefString;
 
+   
+
+    public virtual void ResetData() { }
+    protected virtual void CheckAppendData() { }
+
+
+    
     public virtual void Init() {
         try {
             JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString(prefString), this);
@@ -18,10 +25,8 @@ public class BaseData : MonoBehaviour {
 
         CheckAppendData();
     }
-
-    public virtual void ResetData() { }
-    protected virtual void CheckAppendData() { }
-
+    
+    
     protected void Save() {
         string json = JsonUtility.ToJson(this);
         // Debug.Log("json_______" + json);

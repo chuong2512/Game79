@@ -26,11 +26,7 @@ public class PlayerData : BaseData
         Save();
     }
 
-    public void ResetTime()
-    {
-        time = 0;
-        Save();
-    }
+
     
     public override void Init()
     {
@@ -76,14 +72,7 @@ public class PlayerData : BaseData
         Save();
     }
 
-    public void AddDiamond(int a)
-    {
-        intBullets += a;
-
-        onChangeDiamond?.Invoke(intBullets);
-        
-        Save();
-    }
+ 
 
     public bool CheckCanUnlock()
     {
@@ -107,6 +96,21 @@ public class PlayerData : BaseData
     public void ChooseSong(int i)
     {
         currentSong = i;
+        Save();
+    }
+    
+    public void AddDiamond(int a)
+    {
+        intBullets += a;
+
+        onChangeDiamond?.Invoke(intBullets);
+        
+        Save();
+    }
+    
+    public void ResetTime()
+    {
+        time = 0;
         Save();
     }
 }

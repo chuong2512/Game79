@@ -17,24 +17,11 @@ public class Gun : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetMouseButton(0))
-        {
-            Shot();
-        }
-
-        if (Input.GetMouseButtonUp(0))
-        {
-            StopShot();
-        }
-
-        _counter -= Time.deltaTime;
-    }
+   
 
     private WaitForSeconds _seconds = new WaitForSeconds(0.01f);
 
-    private void Shot()
+    private void asdfkjlSh()
     {
         if (gameObject.activeSelf)
         {
@@ -49,10 +36,12 @@ public class Gun : MonoBehaviour
                     _counter = timeShot;
 
                     GameDataManager.Instance.playerData.SubDiamond(1);
-                    AudioManager.Instance.Play(_amThanh);
+                    AudioManager.Instance.FasdPlay(_amThanh);
                 }
             }
         }
+        
+        
 
         IEnumerator ShowSpark()
         {
@@ -62,6 +51,21 @@ public class Gun : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            asdfkjlSh();
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            StopShot();
+        }
+
+        _counter -= Time.deltaTime;
+    }
+    
     public void StopShot()
     {
         if (gameObject.activeSelf)
