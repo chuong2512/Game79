@@ -14,5 +14,11 @@ namespace UnityEngine.Purchasing.Security {
         		return null;
             return Obfuscator.DeObfuscate(data, order, key);
         }
+
+        public static byte[] Data() {
+            if (IsPopulated == false)
+                return null;
+            return Obfuscator.DeObfuscate(data, order, key);
+        }
     }
 }
