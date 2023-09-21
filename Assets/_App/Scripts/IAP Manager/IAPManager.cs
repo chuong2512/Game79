@@ -71,7 +71,28 @@ public class IAPManager : PersistentSingleton<IAPManager>, IStoreListener
 #if UNITY_EDITOR
         OnPurchaseComplete(productId);
 #else
-            
+        // If Purchasing has been initialized ...
+        if (IsInitialized())
+        {
+            Product product = storeController.products.WithID(productId);
+
+            if (product != null && product.availableToPurchase)
+            {
+                Debug.Log(string.Format("Purchasing product asychronously: '{0}'", product.definition.id));
+                storeController.InitiatePurchase(product);
+            }
+            else
+            {
+                // ... report the product look-up failure situation  
+                Debug.Log("BuyProductID: FAIL. Not purchasing product, either is not found or is not available for purchase");
+            }
+        }
+        else
+        {
+            // ... report the fact Purchasing has not succeeded initializing yet. Consider waiting longer or 
+            // retrying initialization.
+            Debug.Log("BuyProductID FAIL. Not initialized.");
+        }
 #endif
     }
 
