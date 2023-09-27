@@ -10,6 +10,7 @@ public class RegisterManager : MonoBehaviour
     public Button buttonStart;
 
     public GameObject playGame, subObj;
+    public GameObject Rate;
 
     public TextMeshProUGUI textRemain;
 
@@ -51,6 +52,7 @@ public class RegisterManager : MonoBehaviour
         {
             playGame.SetActive(false);
             gameObject.SetActive(false);
+            RateGame();
         }
         else
         {
@@ -59,9 +61,18 @@ public class RegisterManager : MonoBehaviour
         }
     }
 
+    private void RateGame()
+    {
+        if (PlayerPrefs.GetInt("Rate", 0) != 1)
+        {
+            Rate.SetActive(true);
+        }
+    }
+
     private void OnClickButton()
     {
         gameObject.SetActive(false);
+        RateGame();
     }
 
     public void OnPressDown(int i)
